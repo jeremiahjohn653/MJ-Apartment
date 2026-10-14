@@ -159,7 +159,7 @@ async function toggleTask(name,done){const {error}=await sb.from('tasks').update
 async function resetTasks(){const {error}=await sb.from('tasks').update({done:false}).eq('user_id',user.id);if(error)return alert(error.message);Object.keys(data.tasks).forEach(k=>data.tasks[k]=false);render()}
 
 let type;
-function openModal(title,fields,t){type=t;document.getElementById('modalTitle').textContent=title;document.getElementById('form').innerHTML=fields.map(f=>{let[n,l,k]=f;if(k[0]=='s')return `<label>${l}<select name="${n}">${k.slice(1).split(',').map(x=>`<option>${x}</option>`).join('')}</select></label>`;return `<label>${l}<input name="${n}" type="${k}" ${n=='date'||n=='checkin'?'value="'+ISO(D)+'"':''} required></label>`}).join('');document.getElementById('modal').classList.add('open')}
+function openModal(title,fields,t){type=t;document.getElementById('modalTitle').textContent=title;document.getElementById('form').innerHTML=fields.map(f=>{let[n,l,k]=f;if(k[0]=='s')return `<label>${l}<select name="${n}">${k.slice(1).split(',').map(x=>`<option>${x}</option>`).join('')}</select></label>`;return `<label>${l}<input name="${n}" type="${k}" ${n=='date'||n=='checkin'?'value="'+ISO(D)+'"':''} ${['guest','checkin','checkout','revenue','date','amount','category','channel','activity'].includes(n)?'required':''}></label>`}).join('');document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function booking(){openModal('Add booking',[['guest','Guest name','text'],['contact','Contact','text'],['checkin','Check-in','date'],['checkout','Check-out','date'],['revenue','Revenue (TZS)','number'],['source','Source','sWhatsApp,Referral,Airbnb,Booking.com,Other'],['status','Status','sBooked,Staying,Completed,Cancelled'],['feedback','Feedback','text']],'b')}
 function expense(){openModal('Add expense',[['date','Date','date'],['category','Category','sRent,Cleaner,Electricity,Water,Internet,Supplies,Maintenance,Other'],['note','Note','text'],['amount','Amount (TZS)','number']],'e')}
@@ -174,4 +174,3 @@ let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;docume
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
 </script>
 </body></html>
-
