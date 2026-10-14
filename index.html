@@ -65,7 +65,7 @@ main{margin-left:220px;padding:28px;max-width:1400px}.top{display:flex;justify-c
 </main>
 </div>
 
-<div class="modal" id="modal"><div class="modalbox"><h2 id="modalTitle"></h2><form id="form" class="form"></form><div class="right"><button class="btn" type="button" onclick="closeModal()">Cancel</button> <button class="primary btn" type="submit">Save</button></div></div></div>
+<div class="modal" id="modal"><div class="modalbox"><h2 id="modalTitle"></h2><form id="form" class="form"></form><div class="right"><button class="btn" type="button" onclick="closeModal()">Cancel</button> <button class="primary btn" type="submit" form="form">Save</button></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
@@ -174,3 +174,4 @@ let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;docume
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
 </script>
 </body></html>
+
